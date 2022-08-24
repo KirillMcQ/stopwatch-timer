@@ -3,6 +3,10 @@ function stopwatch() {
   let endTime;
   let elapsedTime;
   let running = false;
+
+  /**
+   * Starts a stopwatch if one hasn't already been started
+   */
   this.start = function () {
     if (running) {
       return;
@@ -10,6 +14,10 @@ function stopwatch() {
     running = true;
     startTime = new Date();
   };
+
+  /**
+   * Stops the current stopwatch
+   */
   this.stop = function () {
     if (!running) {
       return;
@@ -18,9 +26,15 @@ function stopwatch() {
     endTime = new Date();
     elapsedTime = endTime - startTime;
   };
+
+  /**
+   * Gets either the current time the stopwatch has been running for or how long it ran for
+   * @returns {number} the time in seconds
+   */
   this.getTime = function () {
     // Return the elapsed time in seconds.
-    return elapsedTime / 1000;
+    if(running) return (new Date() - startTime) / 1000;
+    else return elapsedTime / 1000;
   };
 }
 
